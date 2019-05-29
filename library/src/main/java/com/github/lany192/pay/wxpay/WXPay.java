@@ -19,7 +19,7 @@ public class WXPay {
     private static WXPay mWXPay;
     private IWXAPI mWXApi;
     private String mPayParam;
-    private WXPayResultCallBack mCallback;
+    private WXPayCallBack mCallback;
 
     public WXPay(Context context, String appId) {
         mWXApi = WXAPIFactory.createWXAPI(context, null);
@@ -43,7 +43,7 @@ public class WXPay {
     /**
      * 发起微信支付
      */
-    public void pay(String params, WXPayResultCallBack callback) {
+    public void pay(String params, WXPayCallBack callback) {
         mPayParam = params;
         mCallback = callback;
         //检测是否支持微信支付

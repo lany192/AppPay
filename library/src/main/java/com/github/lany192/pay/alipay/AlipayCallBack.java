@@ -1,15 +1,20 @@
-package com.github.lany192.pay.wxpay;
+package com.github.lany192.pay.alipay;
 
 import com.github.lany192.pay.ErrorCode;
 
 /**
- * 微信支付回调
+ * 支付宝支付回调
  */
-public interface WXPayResultCallBack {
+public interface AlipayCallBack {
     /**
      * 支付成功
      */
     void onSuccess();
+
+    /**
+     * 正在处理中 小概率事件 此时以验证服务端异步通知结果为准
+     */
+    void onDealing();
 
     /**
      * 支付失败

@@ -17,9 +17,9 @@ public class Alipay {
     private final String TAG = getClass().getSimpleName();
     private String mParams;
     private PayTask mPayTask;
-    private AlipayResultCallBack mCallback;
+    private AlipayCallBack mCallback;
 
-    public Alipay(Activity activity, String params, AlipayResultCallBack callback) {
+    public Alipay(Activity activity, String params, AlipayCallBack callback) {
         mParams = params;
         mCallback = callback;
         mPayTask = new PayTask(activity);

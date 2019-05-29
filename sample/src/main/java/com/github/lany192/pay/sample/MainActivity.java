@@ -13,9 +13,9 @@ import android.widget.Toast;
 import com.github.lany192.pay.ErrorCode;
 import com.github.lany192.pay.PayUtils;
 import com.github.lany192.pay.alipay.Alipay;
-import com.github.lany192.pay.alipay.AlipayResultCallBack;
+import com.github.lany192.pay.alipay.AlipayCallBack;
 import com.github.lany192.pay.wxpay.WXPay;
-import com.github.lany192.pay.wxpay.WXPayResultCallBack;
+import com.github.lany192.pay.wxpay.WXPayCallBack;
 import com.hjq.toast.ToastUtils;
 import com.lany.box.activity.BaseActivity;
 import com.lany.box.config.ActivityConfig;
@@ -117,7 +117,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param pay_param 支付服务生成的支付参数
      */
     private void doAlipay(String pay_param) {
-        new Alipay(this, pay_param, new AlipayResultCallBack() {
+        new Alipay(this, pay_param, new AlipayCallBack() {
             @Override
             public void onSuccess() {
                 ToastUtils.show("支付成功");
@@ -132,15 +132,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onError(ErrorCode code) {
                 switch (code) {
                     case ERROR_RESULT:
-                        Toast.makeText(getApplication(), "支付失败:支付结果解析错误", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("支付失败:支付结果解析错误");
                         break;
 
                     case ERROR_NETWORK:
-                        Toast.makeText(getApplication(), "支付失败:网络连接错误", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("支付失败:网络连接错误");
                         break;
 
                     case ERROR_PAY:
-                        Toast.makeText(getApplication(), "支付错误:支付码支付失败", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("支付错误:支付码支付失败");
                         break;
 
                     default:
@@ -162,9 +162,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
      * @param pay_param 支付服务生成的支付参数
      */
     private void doWXPay(String pay_param) {
-        String wx_appid = "wxXXXXXXX";     //替换为自己的appid
-        WXPay.init(getApplicationContext(), wx_appid);      //要在支付前调用
-        WXPay.getInstance().pay(pay_param, new WXPayResultCallBack() {
+        String wxAppId = "wxXXXXXXX";     //替换为自己的appid
+        WXPay.init(getApplicationContext(), wxAppId);      //要在支付前调用
+        WXPay.getInstance().pay(pay_param, new WXPayCallBack() {
             @Override
             public void onSuccess() {
                 ToastUtils.show("支付成功");
@@ -174,15 +174,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onError(ErrorCode code) {
                 switch (code) {
                     case ERROR_NO_OR_LOW_WX:
-                        Toast.makeText(getApplication(), "未安装微信或微信版本过低", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("未安装微信或微信版本过低");
                         break;
 
                     case ERROR_PAY_PARAM:
-                        Toast.makeText(getApplication(), "参数错误", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("参数错误");
                         break;
 
                     case ERROR_PAY:
-                        Toast.makeText(getApplication(), "支付失败", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show("支付失败");
                         break;
                 }
             }
